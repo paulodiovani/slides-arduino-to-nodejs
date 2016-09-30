@@ -1,0 +1,34 @@
+{
+  "name": "slides-arduino-to-nodejs",
+  "homepage": "https://github.com/paulodiovani/slides-arduino-to-nodejs",
+  "authors": [
+    "Paulo Diovani <paulo@diovani.com>"
+  ],
+  "description": "Sending messages from Arduino board to a Node.js application.",
+  "main": [
+    "css/custom.css",
+    "img/*.{jpg,png,svg,gif}",
+    "js/pointer-fix.js",
+    "content.md",
+    "cover.jpg",
+    "index.html"
+  ],
+  "keywords": [
+    "arduino",
+    "nodejs",
+    "javascript",
+    "talk"
+  ],
+  "license": "CC-BY-NC-SA",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "reveal.js": "^3.3.0"
+  }
+}
