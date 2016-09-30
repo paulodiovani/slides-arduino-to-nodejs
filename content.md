@@ -1,6 +1,8 @@
-# Arduino to Node.js
 
-Sending messages from [Arduino][ino] board to a [Node.js][node] application.
+# Arduino to Node.js
+# <i class="br br-arduino"></i> ⬌ <i class="br br-nodejs"></i> &nbsp;&nbsp;
+
+_Sending messages from [Arduino][ino] board to a [Node.js][node] application._
 
 <small>Version 0.1.0</small>
 

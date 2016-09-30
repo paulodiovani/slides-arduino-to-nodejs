@@ -1,0 +1,33 @@
+@font-face {
+  font-family: 'slides-arduino-to-nodejs-icons';
+  src:  url('fonts/slides-arduino-to-nodejs-icons.eot?6bj349');
+  src:  url('fonts/slides-arduino-to-nodejs-icons.eot?6bj349#iefix') format('embedded-opentype'),
+    url('fonts/slides-arduino-to-nodejs-icons.ttf?6bj349') format('truetype'),
+    url('fonts/slides-arduino-to-nodejs-icons.woff?6bj349') format('woff'),
+    url('fonts/slides-arduino-to-nodejs-icons.svg?6bj349#slides-arduino-to-nodejs-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.br {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'slides-arduino-to-nodejs-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.br-nodejs:before {
+  content: "\e901";
+}
+.br-arduino:before {
+  content: "\e900";
+}
+
