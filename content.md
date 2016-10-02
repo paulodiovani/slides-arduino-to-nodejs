@@ -62,6 +62,84 @@ _Interdisciplinary Project I &ndash; 2015_
 
 But worth take a look at [johnny-five.io](http://johnny-five.io/).
 
+Note:
+Johnny-Five is a Node.js Library used for
+prototyping with many different board.
+
+----
+
+## Writing Arduino code
+
+The arduino _sketch_ structure.
+
+```cc
+void setup()
+{
+    // Called when a sketch starts
+    // Use it to initialize variables, pin modes, etc.
+    // Runs once
+}
+
+void loop()
+{
+    // Called just after setup()
+    // Use it to actively control the Arduino board.
+    // Loops consecutively.
+}
+```
+
+Note:
+Arduino code is based on C++ but with
+it's own commands and librearies
+
+====
+<!-- .slide: data-background="linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(img/arduino-ultrasonic.jpg)" data-background-size="cover" -->
+
+# <i class="fa fa-question-circle-o"></i>
+
+### How to send sensor data to a web server?
+
+We're using a ultrasonic sensor for example,
+but could be any sensor. <!-- .element: class="small" -->
+
+- ~~Serial/USB port~~
+- TCP Socket
+
+http://blog.filipeflop.com/sensores/sensor-ultrassonico-hc-sr04-ao-arduino.html <!-- .element: class="credits" -->
+
+Note:
+For serial/USB port the Arduino must be
+physicaly conected to the server.
+
+====
+<!-- .slide: data-background="linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(img/arduino-ethernet.jpg)" data-background-size="cover" data-background-position="center" -->
+
+## Arduino Ethernet Shield
+
+https://www.arduino.cc/en/Main/ArduinoEthernetShield
+
+- Allow TCP/IP connections
+- Can get a DHCP address
+- Read/Write to SD Card
+
+http://www.arduino.cc <!-- .element: class="credits" -->
+
+====
+
+### Assembling Ethernet Shield
+
+![ethernet-assembly](img/arduino-ethernet-assembly.jpg)
+
+https://www.flickr.com/photos/bpunkt/3141966707 <!-- .element: class="credits" -->
+
+====
+
+### Assembling Ultrasonic Sensor
+
+![ultrasonic-assembly](img/arduino-ultrasonic-assembly.png)
+
+http://blog.filipeflop.com/sensores/sensor-ultrassonico-hc-sr04-ao-arduino.html <!-- .element: class="credits" -->
+
 ----
 
 # Questions?
