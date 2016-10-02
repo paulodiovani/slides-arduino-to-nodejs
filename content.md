@@ -42,7 +42,7 @@ GNU/Linux user since 2005.
 [become@codeminer42.com](mailto:become@codeminer42.com)
 
 ----
-<!-- .slide: data-background="linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)), url(img/lazy-parking.jpg)" data-background-size="cover" -->
+<!-- .slide: data-background="linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(img/lazy-parking.jpg)" data-background-size="cover" -->
 
 A proof of concept for...
 
@@ -52,6 +52,15 @@ A proof of concept for...
 _Internet Systems Technology &ndash;
 [Feevale University](http://feevale.br)_<br>
 _Interdisciplinary Project I &ndash; 2015_
+
+====
+<!-- .slide: data-background="linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(img/johnny-five.jpg)" data-background-size="cover" -->
+
+# <i class="br br-johnny-five"></i>
+
+### We're not talking about Johnny-Five. Sorry.
+
+But worth take a look at [johnny-five.io](http://johnny-five.io/).
 
 ----
 
