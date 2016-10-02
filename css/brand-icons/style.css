@@ -1,17 +1,17 @@
 @font-face {
-  font-family: 'slides-arduino-to-nodejs-icons';
-  src:  url('fonts/slides-arduino-to-nodejs-icons.eot?6bj349');
-  src:  url('fonts/slides-arduino-to-nodejs-icons.eot?6bj349#iefix') format('embedded-opentype'),
-    url('fonts/slides-arduino-to-nodejs-icons.ttf?6bj349') format('truetype'),
-    url('fonts/slides-arduino-to-nodejs-icons.woff?6bj349') format('woff'),
-    url('fonts/slides-arduino-to-nodejs-icons.svg?6bj349#slides-arduino-to-nodejs-icons') format('svg');
+  font-family: 'brand-icons';
+  src:  url('fonts/brand-icons.eot?p644qe');
+  src:  url('fonts/brand-icons.eot?p644qe#iefix') format('embedded-opentype'),
+    url('fonts/brand-icons.ttf?p644qe') format('truetype'),
+    url('fonts/brand-icons.woff?p644qe') format('woff'),
+    url('fonts/brand-icons.svg?p644qe#brand-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 .br {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'slides-arduino-to-nodejs-icons' !important;
+  font-family: 'brand-icons' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -24,10 +24,31 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.br-nodejs:before {
+.br-arduino:before {
+  content: "\e905";
+}
+.br-arduino-notext:before {
+  content: "\e908";
+}
+.br-codeminer:before {
+  content: "\e906";
+}
+.br-heroku:before {
   content: "\e901";
 }
-.br-arduino:before {
+.br-nodejs:before {
+  content: "\e907";
+}
+.br-postgresql:before {
   content: "\e900";
+}
+.br-rails:before {
+  content: "\e902";
+}
+.br-ruby:before {
+  content: "\e903";
+}
+.br-travis-ci:before {
+  content: "\e904";
 }
 
