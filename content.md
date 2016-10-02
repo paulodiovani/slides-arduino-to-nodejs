@@ -1,6 +1,6 @@
 
 # Arduino to Node.js
-# <i class="br br-arduino"></i> ⬌ <i class="br br-nodejs"></i> &nbsp;&nbsp;
+# <i class="br br-arduino-notext"></i> ⬌ <i class="br br-nodejs"></i> &nbsp;
 
 _Sending messages from [Arduino][ino] board to a [Node.js][node] application._
 
@@ -33,6 +33,13 @@ GNU/Linux user since 2005.
 [twitter]: http://twitter.com/paulodiovani
 [code-logo]: img/codeminer42.png
 [code-site]: http://codeminer42.com/
+
+====
+
+# <i class="br br-codeminer" style="font-size: 3em;"></i>
+
+**we're hiring**<br>
+[become@codeminer42.com](mailto:become@codeminer42.com)
 
 ----
 
