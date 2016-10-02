@@ -42,6 +42,18 @@ GNU/Linux user since 2005.
 [become@codeminer42.com](mailto:become@codeminer42.com)
 
 ----
+<!-- .slide: data-background="linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)), url(img/lazy-parking.jpg)" data-background-size="cover" -->
+
+A proof of concept for...
+
+# <i class="fa fa-map-marker"></i> <i class="fa fa-car"></i>
+## Lazy Parking
+
+_Internet Systems Technology &ndash;
+[Feevale University](http://feevale.br)_<br>
+_Interdisciplinary Project I &ndash; 2015_
+
+----
 
 # Questions?
 
