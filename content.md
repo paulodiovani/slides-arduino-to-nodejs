@@ -308,8 +308,6 @@ Node server reads data received on TCP Port
 
 ```js
 const onMsgReceived = function(data) {
-  ClientLog(`Client sent: ${data.toString()}`);
-
   const json = JSON.parse(data.toString());
   Io.emit('arduino:message', json);
 };
