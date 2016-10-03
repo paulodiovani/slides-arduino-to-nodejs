@@ -222,6 +222,8 @@ unit     | string | cm
 
 ----
 
+# <i class="br br-arduino"></i>
+
 ## Arduino Sketch
 
 Source code available at GitHub<!-- .element: class="small" -->
@@ -241,6 +243,7 @@ Note:
 
 ====
 
+# <i class="br br-nodejs"></i>
 ## Node.js web app
 
 Source code available at GitHub<!-- .element: class="small" -->
@@ -259,6 +262,8 @@ Note:
     + send to browser
 
 ====
+
+# <i class="fa fa-code"></i>
 
 ## Front-end code
 
