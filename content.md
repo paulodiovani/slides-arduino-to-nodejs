@@ -167,68 +167,15 @@ Source code available at GitHub<!-- .element: class="small" -->
 [arduino-repos]: https://github.com/paulodiovani/arduino2node
 [arduino-file]: https://github.com/paulodiovani/arduino2node/tree/master/arduino/distance/distance.ino
 
-====
-
-```c++
-// file: distance/distance.ino
-
-void setup() {
-  Serial.begin(9600);
-
-  // set modes for sensor pins
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
-
-  Ethernet.begin(mac, ip);
-  delay(1000);
-  Serial.println("connecting...");
-
-  if (client.connect(server, 4000)) {
-    Serial.println("connected");
-  } else {
-    Serial.println("connection failed");
-  }
-}
-```
-
 Note:
-- set sensor pin modes
-- connect to server
+- `setup()`
+    + set sensor pin modes
+    + connect to server
+- `loop()`
+    + read sensor data
+    + send data to server
 
 ====
-
-```c++
-// file: distance/distance.ino
-
-void loop() {
-  long duration, cm;
-
-  //get sensor data
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(trigPin, LOW);
-
-  duration = pulseIn(echoPin, HIGH);
-  cm = microsecondsToCentimeters(duration);
-
-  //print to ethernet client
-  client.print("{\"distance\":" + String(cm) + ",\"unit\":\"cm\"}");
-
-  delay(1000);
-}
-```
-
-Note:
-- read sensor data
-- send data to server
-
-The `microsecondsToCentimeters()` is a simple
-function to convert the time value to cm
-based on the sound velocity.
-
-----
 
 ## Node.js web app
 
@@ -239,54 +186,15 @@ Source code available at GitHub<!-- .element: class="small" -->
 [nodejs-repos]: https://github.com/paulodiovani/arduino2node
 [nodejs-files]: https://github.com/paulodiovani/arduino2node/tree/master/nodejs
 
-====
-
-```js
-/* file: lib/web_server.js */
-
-/* view engine setup */
-app.set('views', Path.join(__dirname, '..', 'views'));
-app.set('view engine', 'ejs');
-
-/* static bower dependencies */
-app.use(Express.static(Path.join(__dirname, '..', 'bower_components')));
-
-/* routes */
-app.get('/', (req, res) => {
-  res.render('index');
-});
-```
-
 Note:
-A simple Express.js app with
-`socket.io` attached (not shown).
+- `web`
+    A simple Express.js app with
+    `socket.io` attached (not shown).
+- `tcp-socket`
+    + receives messages from net socket
+    + send to browser
 
 ====
-
-```js
-/* file: lib/socket_server.js */
-
-let Io; /* Socket.io instance */
-
-const onMsgReceived = (data) => {
-  const json = JSON.parse(data.toString());
-  Io.emit('arduino:message', json);
-};
-
-module.exports = (io) => {
-  Io = io;
-
-  return Net.createServer((client) => {
-    client.on('data', onMsgReceived);
-  });
-};
-```
-
-Note:
-- receives messages from net socket
-- send to browser
-
-----
 
 ## Front-end code
 
@@ -297,30 +205,200 @@ Source code available at GitHub<!-- .element: class="small" -->
 [browser-repos]: https://github.com/paulodiovani/arduino2node
 [browser-code]: https://github.com/paulodiovani/arduino2node/tree/master/nodejs/views/index.ejs
 
+Note:
+- update DOM with `socket.io` events data
+
+----
+
+## Mostly Relevant code
+
 ====
 
+### Arduino
+
+Arduino sends data through TCP Socket
+
+```c++
+EthernetClient client;
+
+void setup() {
+  //[...]
+  Ethernet.begin(mac, ip);
+  client.connect(server, 4000);
+  //[...]
+}
+
+void loop() {
+  //[...]
+  client.print("{\"distance\":" + String(cm) + ",\"unit\":\"cm\"}");
+
+  delay(1000);
+}
+```
+
+====
+
+### Node.js
+
+Node server reads data received on TCP Port
+
 ```js
-/* file: views/index.ejs */
+const onMsgReceived = function(data) {
+  ClientLog(`Client sent: ${data.toString()}`);
 
-var socket = io();
-var maxDistance = 200;
+  const json = JSON.parse(data.toString());
+  Io.emit('arduino:message', json);
+};
 
-socket.on('arduino:message', function(data) {
-  var log = "received " + JSON.stringify(data)
-          + " at " + new Date() + "\n";
-  var barWidth = data.distance * 100 / maxDistance;
-
-  $('#sensor-log').prepend(log);
-
-  $('#distance-bar')
-    .attr('aria-valuenow', data.distance)
-    .css('width', barWidth + '%')
-    .html(data.distance + data.unit);
+const socket = Net.createServer((client) => {
+    client.on('data', onMsgReceived);
 });
+
+socket.listen(4000);
 ```
 
 Note:
-- update DOM with `socket.io` events data
+The `stream.on` is the easiest/simplier
+way to make it done.
+
+But it's not the best.
+
+====
+
+```js
+client instanceof Stream
+```
+<!-- .element: class="big align-center" -->
+
+https://nodejs.org/api/stream.html
+
+====
+<!-- .slide: data-background="linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(img/water-dam.gif)" data-background-size="cover" data-background-position="center" -->
+
+### Stream events
+
+![strem-events](img/stream-events.gif)
+
+http://www.slideshare.net/kushallikhi/streams-in-node-js <!-- .element: class="credits" -->
+
+http://www.spk.usace.army.mil/Missions/Civil-Works/Dam-Safety-Program/ <!-- .element: class="credits" -->
+
+Note:
+We're listening to stream events
+
+====
+<!-- .slide: data-background="linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(img/water-dam.gif)" data-background-size="cover" data-background-position="center" -->
+
+- Constant flow of data
+
+- Arduino can't control the init/end of messages
+
+  ```c++
+  void loop() {
+    //[...]
+    //delay(1000);
+  }
+  ```
+  <!-- .element: class="fragment" data-fragment-index="1" -->
+
+  <i class="fa fa-warning"></i> Messages can be joined together.
+  <!-- .element: class="fragment" data-fragment-index="2" -->
+
+  ```json
+  {"distance":17,"unit":"cm"}{"distance":20,"unit":"cm"}
+  ```
+  <!-- .element: class="fragment" data-fragment-index="2" -->
+
+http://www.spk.usace.army.mil/Missions/Civil-Works/Dam-Safety-Program/ <!-- .element: class="credits" -->
+
+Note:
+Can you see the problem here?
+
+====
+<!-- .slide: data-background="linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(img/water-dam.gif)" data-background-size="cover" data-background-position="center" -->
+
+```js
+> JSON.parse('{"distance":17,"unit":"cm"}{"distance":20,"unit":"cm"}');
+SyntaxError: Unexpected token `{` in JSON at position 27
+    at Object.parse (native)
+    at repl:1:6
+    at REPLServer.defaultEval (repl.js:272:27)
+    at bound (domain.js:280:14)
+    at REPLServer.runBound [as eval] (domain.js:293:12)
+    at REPLServer.<anonymous> (repl.js:441:10)
+    at emitOne (events.js:101:20)
+    at REPLServer.emit (events.js:188:7)
+    at REPLServer.Interface._onLine (readline.js:219:10)
+    at REPLServer.Interface._line (readline.js:561:8)
+```
+
+http://www.spk.usace.army.mil/Missions/Civil-Works/Dam-Safety-Program/ <!-- .element: class="credits" -->
+
+Note:
+Can't parse inconsistent JSON
+
+====
+<!-- .slide: data-background="linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(img/pipes.gif)" data-background-size="cover" data-background-position="center" -->
+
+### Using Streams
+
+![duplex-stream](img/stream-duplex.svg) <!-- .element: class="wide" -->
+
+http://codewinds.com/blog/2013-08-31-nodejs-duplex-streams.html <!-- .element: class="credits" -->
+
+http://bojackhorseman.com/ <!-- .element: class="credits" -->
+
+Note:
+- Streams are interpreted as a pipe.
+- And we use the `pipe()` method
+
+====
+<!-- .slide: data-background="linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(img/pipes.gif)" data-background-size="cover" data-background-position="center" -->
+
+Use `pipe()` instead of events.
+
+```js
+const browserStream = new Stream.Writable({
+  write: function(chunk, encoding, callback) {
+    const json = JSON.parse(chunk.toString());
+    Io.emit('arduino:message', json);
+
+    callback();
+  }
+});
+
+client.pipe(browserStream);
+```
+
+http://bojackhorseman.com/ <!-- .element: class="credits" -->
+
+====
+<!-- .slide: data-background="linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(img/pipes.gif)" data-background-size="cover" data-background-position="center" -->
+
+```js
+const splitStream = new Stream.Transform({
+  transform: function(chunk, encoding, callback) {
+    const text = chunk.toString();
+    const re = /(\{[^\}]*\})/;
+    const jsonArr = text.split(re).filter((j) => j != '');
+
+    jsonArr.map((j) => this.push(j));
+
+    callback();
+  }
+});
+
+client
+  .pipe(splitStream)
+  .pipe(browserStream);
+```
+
+Better. <i class="fa fa-smile-o"></i>
+
+http://bojackhorseman.com/ <!-- .element: class="credits" -->
+
+Note:
+Solution: Use a transform stream to split data.
 
 ----
 

@@ -67,6 +67,10 @@ small text
   font-size: .6em !important;
 }
 
+.align-center {
+  text-align: center !important;
+}
+
 /*
 50% width
  */
