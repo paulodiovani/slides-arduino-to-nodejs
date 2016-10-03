@@ -6,6 +6,8 @@
   ],
   "description": "Sending messages from Arduino board to a Node.js application.",
   "main": [
+    "css/brand-icons/fonts/*",
+    "css/brand-icons/style.css",
     "css/custom.css",
     "img/*.{jpg,png,svg,gif}",
     "js/pointer-fix.js",
