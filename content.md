@@ -158,6 +158,70 @@ http://blog.filipeflop.com/sensores/sensor-ultrassonico-hc-sr04-ao-arduino.html 
 
 ----
 
+## Defining a protocol
+
+> [...] a communication protocol is a system of rules that allow two or more entities of a communications system to transmit information [...]
+
+_Source: Wikipedia_ <!-- .element: class="small" -->
+
+Note:
+For any kind of net communication it makes
+necessary to define a protocol.
+
+====
+
+Rules or standard that defines...
+
+-  syntax
+-  semantics
+-  synchronization of communication
+-  error recovery methods
+
+====
+
+### Example: HTTP
+
+```http
+GET /index.html HTTP/1.1
+Host: www.example.com
+```
+
+```http
+HTTP/1.1 200 OK
+Date: Mon, 23 May 2005 22:38:34 GMT
+Content-Type: text/html; charset=UTF-8
+Content-Encoding: UTF-8
+Content-Length: 138
+Last-Modified: Wed, 08 Jan 2003 23:11:55 GMT
+Server: Apache/1.3.3.7 (Unix) (Red-Hat/Linux)
+ETag: "3f80f-1b6-3e1cb03b"
+Accept-Ranges: bytes
+Connection: close
+
+<html>
+...
+```
+
+====
+
+### Our protocol
+
+We are just using plaing text JSON.
+
+```json
+{
+  "distance": 99,
+  "unit": "cm"
+}
+```
+
+name     | type   | default
+--       | --     | --
+distance | number |
+unit     | string | cm
+
+----
+
 ## Arduino Sketch
 
 Source code available at GitHub<!-- .element: class="small" -->
