@@ -41,6 +41,9 @@ GNU/Linux user since 2005.
 **we're hiring**<br>
 [become@codeminer42.com](mailto:become@codeminer42.com)
 
+Note:
+Any questions talk to me. ;)
+
 ----
 <!-- .slide: data-background="linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(img/lazy-parking.jpg)" data-background-size="cover" -->
 
@@ -52,6 +55,11 @@ A proof of concept for...
 _Internet Systems Technology &ndash;
 [Feevale University](http://feevale.br)_<br>
 _Interdisciplinary Project I &ndash; 2015_
+
+Note:
+Curious about the project?
+
+Talk to me later.
 
 ====
 <!-- .slide: data-background="linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url(img/johnny-five.jpg)" data-background-size="cover" -->
@@ -108,7 +116,9 @@ but could be any sensor. <!-- .element: class="small" -->
 http://blog.filipeflop.com/sensores/sensor-ultrassonico-hc-sr04-ao-arduino.html <!-- .element: class="credits" -->
 
 Note:
-For serial/USB port the Arduino must be
+This is our main problem.
+
+- For serial/USB port the Arduino must be
 physicaly conected to the server.
 
 ====
@@ -124,6 +134,9 @@ https://www.arduino.cc/en/Main/ArduinoEthernetShield
 
 http://www.arduino.cc <!-- .element: class="credits" -->
 
+Note:
+So we decided to use Ethernet Shield.
+
 ====
 
 ### Assembling Ethernet Shield
@@ -131,6 +144,9 @@ http://www.arduino.cc <!-- .element: class="credits" -->
 ![ethernet-assembly](img/arduino-ethernet-assembly.jpg)
 
 https://www.flickr.com/photos/bpunkt/3141966707 <!-- .element: class="credits" -->
+
+Note:
+Ethernet Shield fits on top of Arduino Uno.
 
 ====
 
