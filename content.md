@@ -72,7 +72,7 @@ prototyping with many different board.
 
 The arduino _sketch_ structure.
 
-```cc
+```c++
 void setup()
 {
     // Called when a sketch starts
@@ -139,6 +139,172 @@ https://www.flickr.com/photos/bpunkt/3141966707 <!-- .element: class="credits" -
 ![ultrasonic-assembly](img/arduino-ultrasonic-assembly.png)
 
 http://blog.filipeflop.com/sensores/sensor-ultrassonico-hc-sr04-ao-arduino.html <!-- .element: class="credits" -->
+
+----
+
+## Arduino Sketch
+
+Source code available at GitHub<!-- .element: class="small" -->
+
+[paulodiovani/arduino2node][arduino-repos]&nbsp;/&nbsp;[arduino/distance/distance.ino][arduino-file]
+
+[arduino-repos]: https://github.com/paulodiovani/arduino2node
+[arduino-file]: https://github.com/paulodiovani/arduino2node/tree/master/arduino/distance/distance.ino
+
+====
+
+```c++
+// file: distance/distance.ino
+
+void setup() {
+  Serial.begin(9600);
+
+  // set modes for sensor pins
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+
+  Ethernet.begin(mac, ip);
+  delay(1000);
+  Serial.println("connecting...");
+
+  if (client.connect(server, 4000)) {
+    Serial.println("connected");
+  } else {
+    Serial.println("connection failed");
+  }
+}
+```
+
+Note:
+- set sensor pin modes
+- connect to server
+
+====
+
+```c++
+// file: distance/distance.ino
+
+void loop() {
+  long duration, cm;
+
+  //get sensor data
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(trigPin, LOW);
+
+  duration = pulseIn(echoPin, HIGH);
+  cm = microsecondsToCentimeters(duration);
+
+  //print to ethernet client
+  client.print("{\"distance\":" + String(cm) + ",\"unit\":\"cm\"}");
+
+  delay(1000);
+}
+```
+
+Note:
+- read sensor data
+- send data to server
+
+The `microsecondsToCentimeters()` is a simple
+function to convert the time value to cm
+based on the sound velocity.
+
+----
+
+## Node.js web app
+
+Source code available at GitHub<!-- .element: class="small" -->
+
+[paulodiovani/arduino2node][nodejs-repos]&nbsp;/&nbsp;[nodejs][nodejs-files]
+
+[nodejs-repos]: https://github.com/paulodiovani/arduino2node
+[nodejs-files]: https://github.com/paulodiovani/arduino2node/tree/master/nodejs
+
+====
+
+```js
+/* file: lib/web_server.js */
+
+/* view engine setup */
+app.set('views', Path.join(__dirname, '..', 'views'));
+app.set('view engine', 'ejs');
+
+/* static bower dependencies */
+app.use(Express.static(Path.join(__dirname, '..', 'bower_components')));
+
+/* routes */
+app.get('/', (req, res) => {
+  res.render('index');
+});
+```
+
+Note:
+A simple Express.js app with
+`socket.io` attached (not shown).
+
+====
+
+```js
+/* file: lib/socket_server.js */
+
+let Io; /* Socket.io instance */
+
+const onMsgReceived = (data) => {
+  const json = JSON.parse(data.toString());
+  Io.emit('arduino:message', json);
+};
+
+module.exports = (io) => {
+  Io = io;
+
+  return Net.createServer((client) => {
+    client.on('data', onMsgReceived);
+  });
+};
+```
+
+Note:
+- receives messages from net socket
+- send to browser
+
+----
+
+## Front-end code
+
+Source code available at GitHub<!-- .element: class="small" -->
+
+[paulodiovani/arduino2node][browser-repos]&nbsp;/&nbsp;[nodejs/views/index.ejs][browser-code]
+
+[browser-repos]: https://github.com/paulodiovani/arduino2node
+[browser-code]: https://github.com/paulodiovani/arduino2node/tree/master/nodejs/views/index.ejs
+
+====
+
+```js
+/* file: views/index.ejs */
+
+var socket = io();
+var maxDistance = 200;
+
+socket.on('arduino:message', function(data) {
+  var log = "received " + JSON.stringify(data)
+          + " at " + new Date() + "\n";
+  var barWidth = data.distance * 100 / maxDistance;
+
+  $('#sensor-log').prepend(log);
+
+  $('#distance-bar')
+    .attr('aria-valuenow', data.distance)
+    .css('width', barWidth + '%')
+    .html(data.distance + data.unit);
+});
+```
+
+Note:
+- update DOM with `socket.io` events data
 
 ----
 
