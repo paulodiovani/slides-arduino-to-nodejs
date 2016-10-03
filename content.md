@@ -399,6 +399,8 @@ SyntaxError: Unexpected token `{` in JSON at position 27
     at REPLServer.Interface._line (readline.js:561:8)
 ```
 
+_<i class="fa fa-warning"></i> Fails spectacularly!! <i class="fa fa-bomb"></i>_ <!-- .element: class="big" -->
+
 http://www.spk.usace.army.mil/Missions/Civil-Works/Dam-Safety-Program/ <!-- .element: class="credits" -->
 
 Note:
