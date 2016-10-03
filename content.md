@@ -283,8 +283,6 @@ Note:
 
 ====
 
-### Arduino
-
 Arduino sends data through TCP Socket
 
 ```c++
@@ -306,8 +304,6 @@ void loop() {
 ```
 
 ====
-
-### Node.js
 
 Node server reads data received on TCP Port
 
