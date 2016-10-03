@@ -471,6 +471,22 @@ Solution: Use a transform stream to split data.
 
 ----
 
+# Time for Action <i class="fa fa-youtube-play"></i>
+
+====
+<!-- .slide: data-background="img/picture-arduino.jpg" -->
+
+Note:
+The sensor setup (real picture)
+
+====
+<!-- .slide: data-background="img/picture-webserver.jpg" -->
+
+Note:
+The app on browser.
+
+----
+
 # Questions?
 
 ====
