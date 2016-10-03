@@ -487,6 +487,46 @@ The app on browser.
 
 ----
 
+# 🤔
+
+# Conclusions
+
+====
+
+## Challenges
+
+- First attempt in IoT
+- Dealing with low level communications
+- Defining a protocol
+
+Note:
+Thinking of the project Lazy Parking
+
+====
+
+## Caveats
+
+- Arduino is NOT commercial viable
+- Depends on strong _security rules_
+- Depends on stronger _error handling_
+
+Note:
+Thiking of making something available to
+others, in internet or to make profit
+
+====
+
+## Possibilities
+
+- House automation
+- Realtime measurements
+- Communication gadgets
+- Etc.
+
+----
+
+# <i class="fa fa-question-circle-o"></i>
+
 # Questions?
 
 ====
